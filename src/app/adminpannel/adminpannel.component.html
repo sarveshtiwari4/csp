@@ -1,0 +1,377 @@
+
+<p ><button type="button" class="btn btn-outline-primary logout" (click)="logout()">Logout</button></p>
+
+<div class="container-fluid mt-5 ">
+  <div class="row">
+   <div class="col-md-4 ">
+      <button type="button" class="btn btn-outline-primary btn-lg" data-bs-toggle="modal" data-bs-target="#master_form">Recruitment Section Header Entery</button>
+       <div class="modal fade" id="master_form">
+        <div class="modal-dialog center-modal">
+          <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title">Recruitment Section Header Entery</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"> </button>
+            </div>
+              <div class="modal-body">
+                <form  [formGroup]="frm_master" #frm="ngForm" (ngSubmit)='onSubmit()'>
+                        
+                  <div class="form-group  mb-1">
+                    <label class="form-label required">Item code:  </label>
+                    <input type="text" class="form-control" id="item_code" formControlName="txtitemcode" >
+                    
+                  </div>
+                  <br>
+
+                  <div class="form-group">
+                  <label class="form-label required">Advertisement Number: (Length : 6)</label>
+                  <input OnlyNumber="true"  type="text" class="form-control" formControlName="txtadvtno"  placeholder="Enter Advertisement Number" >
+                  <small class="text-danger"  *ngIf=" (advtno.dirty || advtno.touched) && advtno.errors?.['required']">Advertisement Number is Required</small>
+                  <small class="text-danger"  *ngIf="advtno.errors?.['pattern']">Enter only Numbers</small>
+                  
+                </div>
+      
+                <br>
+      
+                  <div class="form-group">
+                    <label class="form-label required">Advertisement Details:</label>
+                    <input type="text" class="form-control advt_d_link" id="advtdetails" formControlName="txtadvtdetails" placeholder="Enter Advertisement Details:">
+                    <small class="text-danger"   *ngIf=" (advtdetails.dirty || advtdetails.touched) && advtdetails.errors?.['pattern']">Advertisement Details is Required</small>
+                  </div>
+      
+                  <br>
+      
+                  <div class="form-group">
+                    <label class="form-label required" >Published:</label>
+                    <select  class="form-control" id="published" formControlName="txtpublished" >
+                    <option  value="1"  >Yes</option>
+                    <option value="0">No</option>
+                  
+                    </select>
+      
+                    <small class="text-danger"   *ngIf=" (published.dirty || published.touched) && published.errors?.['required']">Publication is Required</small>
+                  </div>
+                  <br>
+                  
+               
+                 
+      
+                <div class="modal-footer">
+          
+                    <button type="submit" class="btn btn-outline-primary" [disabled]="!frm.valid">Submit</button> 
+                    <button type="button" class="btn btn-outline-danger"   data-bs-dismiss="modal">Close </button>
+                  
+                </div>
+              </form>
+              </div>
+          </div>
+      
+        </div>
+      
+      </div>
+      
+      </div>
+      
+      
+  
+
+   <div class="col-md-4">
+    
+      <button type="button" class="btn btn-outline-primary btn-lg" data-bs-toggle="modal" data-bs-target="#master_other">Recruitment Section Sub Header Entery</button>
+      
+      <div class="modal fade" id="master_other">
+        <div class="modal-dialog center-modal">
+          <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title">Recruitment Section Sub Header Entery</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+              <div class="modal-body">
+              
+    
+                <form  [formGroup]="frm_other" #frm2="ngForm" (ngSubmit)='onSubmit2()'>
+    
+                      
+                  <div class="form-group mb-1">
+                    <label class="form-label required">Table Name:</label>
+                    <select  class="form-control" id="txttablename" formControlName="txttablename" (change)="OntableNameclick($event)">
+                    <option  value="advertisement">Advertisement</option>
+                    <option  value="home">Home</option>
+                    <option  value="onlineapplication">Online Application</option>
+                    <option  value="notification">Notification</option>
+                    <option  value="modelanswer">Model Answer</option>
+                    <option  value="result">Result</option>
+                    <option  value="latest_result">Latest Result</option>
+                    </select>
+                    <small class="text-danger"   *ngIf=" (tablename.dirty || tablename.touched) && tablename.errors?.['required']">Table Name is Required</small>
+                  </div>
+    
+    
+                  <div class="form-group mb-1">
+                    <label class="form-label required">Advertisement No:</label>
+                    <select  class="form-control" id="txtadvtno2" formControlName="txtadvtno2" >
+                    <option *ngFor="let m of master" [value]=m.advt_no>
+                      {{m.advt_no +"-->"+ m.details }}
+                     </option>
+                    
+                    </select>
+                    
+                  </div>
+                  
+    
+                  <div class="form-group  mb-1">
+                    <label class="form-label required">Item code:  </label>
+                    <input type="text" class="form-control" id="advtdetails" formControlName="txtitemcode" >
+                    <small class="text-danger"   *ngIf=" (itemcode.dirty || itemcode.touched) && itemcode.errors?.['required']">Item code is Required</small>
+                    <small class="text-danger"  *ngIf="itemcode.errors?.['pattern']">Enter only Numbers</small>
+                  </div>
+    
+                  <div class="form-group  mb-1">
+                  <label class="form-label required"> Details:</label>
+                  <input OnlyNumber="true"  type="text" class="form-control advt_d_link" formControlName="txtdetails"  placeholder="Enter Details" >
+                  <small class="text-danger"  *ngIf=" (details.dirty || details.touched) && details.errors?.['required']">Details is Required</small>
+                
+                  
+                </div>
+    
+                <br>
+    
+                  <div class="form-group  mb-1">
+                    <label class="form-label required" >Link:</label>
+                    <input type="text" class="form-control advt_d_link" id="advtdetails" formControlName="txtlink" placeholder="Enter Link Details:" [value]= "link_value" >
+                    <small class="text-danger"   *ngIf=" (link.dirty || link.touched) && link.errors?.['required']"> Link is Required</small>
+                  </div>
+    
+                  <br>
+    
+                  <div class="form-group  mb-1">
+                    <label class="form-label required" >Published:</label>
+                    <select  class="form-control" id="published" formControlName="txtpublished2" >
+                    <option  value="1"  >Yes</option>
+                    <option value="0">No</option>
+                  
+                    </select>
+    
+                    <small class="text-danger"   *ngIf=" (published2.dirty || published2.touched) && published2.errors?.['required']">Publication is Required</small>
+                  </div>
+                  <br>
+    
+                  <div>
+                   
+                  
+                  </div>
+    
+              
+                <div class="modal-footer">
+                
+                   
+                    <button type="submit" class="btn btn-outline-primary" [disabled]="!frm2.valid">Submit</button> 
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close </button>
+                   
+                 
+                </div>
+              </form>
+              </div>
+          </div>
+      
+        </div>
+      
+      </div>
+      
+      </div>
+    
+ 
+
+  <div class="col-md-4">
+
+      <button type="button" class="btn btn-outline-primary btn-lg" data-bs-toggle="modal" data-bs-target="#edit_form">Edit Section</button>
+      
+      <div class="modal fade" id="edit_form">
+        <div class="modal-dialog center-modal">
+          <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title">Edit Section</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"> </button>
+            </div>
+              <div class="modal-body">
+              
+                <form  [formGroup]="frm_edit" #frm3="ngForm" (ngSubmit)='onSubmit2()'>
+
+
+                  <div class="form-group mb-1">
+                    <label class="form-label required">Table Name:</label>
+                    <select  class="form-control" id="txttablename_edit" formControlName="txttablename_edit" (change)="OntableNameclick_edit($event)">
+                    <option  value="master">Master</option>
+                    <option  value="advertisement">Advertisement</option>
+                    <option  value="home">Home</option>
+                    <option  value="onlineapplication">Online Application</option>
+                    <option  value="notification">Notification</option>
+                    <option  value="modelanswer">Model Answer</option>
+                    <option  value="result">Result</option>
+                    <option  value="Latest_result">Latest Result</option>
+                    </select>
+                    <small class="text-danger"   *ngIf=" (table_name_edit.dirty || table_name_edit.touched) && table_name_edit.errors?.['required']">Table Name is Required</small>
+                  </div>
+  
+                  <div class="form-group mb-3">
+                    <label class="form-label required" >Advertisement No:</label>
+                    <input type="text" class="form-control" id="txtadvtno_edit" formControlName="txtadvtno_edit" placeholder="Enter Advertisement No:" >
+                    <small class="text-danger"   *ngIf=" (advtno_edit.dirty || advtno_edit.touched) && advtno_edit.errors?.['required']"> Advertisement No is Required</small>
+                    
+                  </div>
+            
+      
+                <div class="modal-footer">
+          
+                    <button type="submit" class="btn btn-outline-primary" (click)="searchOnclick(advtno_edit.value)" [disabled]="!frm3.valid">Submit</button> 
+                    <button type="button" class="btn btn-outline-danger"   data-bs-dismiss="modal">Close </button>
+                  
+                </div>
+              </form>
+              </div>
+
+              
+          </div>
+          
+        </div>
+       
+      </div>
+      
+     
+    
+      </div>
+      
+
+  </div>
+
+</div>
+
+<div class="container mt-5" *ngIf="table_display">
+<table  class="table table-striped table-hover">
+  <thead class="thead-red" >
+  <tr>
+      <th scope="col">
+          Item Code
+      </th>
+      <th scope="col">
+          Advt No.
+      </th>
+      <th scope="col">
+          {{table_name |uppercase}} Details
+      </th>
+      <th scope="col">
+        Link
+    </th>
+    <th scope="col">
+      Published
+  </th>
+  <th scope="col">
+    Action
+</th>
+  </tr>
+  </thead>
+
+  <tr *ngFor="let item of advt_display;let i=index">
+    <td>
+      {{item.item_code}}
+    </td>
+    <td>
+      {{item.advt_no}}
+    </td>
+    <td>
+      {{item.details}}
+    </td>
+    <td>
+      {{item.link}}
+    </td>
+    <td>
+      {{item.published}}
+    </td>
+    <td>
+      <button type="button" class="btn btn-outline-primary p-2 fa fa-edit" (click)="editOnclick(i)" data-bs-toggle="modal" data-bs-target="#edit_record_form"> Edit</button> 
+  
+    </td>
+   
+  </tr>
+</table>
+</div>
+
+
+
+  
+<div class="modal fade" id="edit_record_form">
+  <div class="modal-dialog center-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+         <h5 class="modal-title">Edit Record </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"> </button>
+      </div>
+        <div class="modal-body">
+        
+          <form  [formGroup]="frm_edit_record" #frm4="ngForm" (ngSubmit)='edit_record_save()'>
+    
+                      
+            <div class="form-group mb-1">
+
+              <label class="form-label required">Table Name:  </label>
+              <input type="text" class="form-control" id="txttablename" formControlName="txttablename" >
+              <small class="text-danger"   *ngIf=" (tablename_edit.dirty || tablename_edit.touched) && tablename_edit.errors?.['required']">Table Name is Required</small>
+            </div>
+
+            <div class="form-group mb-1">
+
+              <label class="form-label required">Advertisement No:  </label>
+              <input type="text" class="form-control" id="txtadvtno2" formControlName="txtadvtno2" >
+              <small class="text-danger"   *ngIf=" (advtno2_edit.dirty || advtno2_edit.touched) && advtno2_edit.errors?.['required']">Advertisement Number is Required</small>
+            </div>
+
+
+            <div class="form-group  mb-1">
+              <label class="form-label required">Item code:  </label>
+              <input type="text" class="form-control" id="advtdetails" formControlName="txtitemcode" >
+              <small class="text-danger"   *ngIf=" (itemcode.dirty_edit || itemcode_edit.touched) && itemcode_edit.errors?.['required']">Item code is Required</small>
+              
+            </div>
+
+            <div class="form-group  mb-1">
+              <label class="form-label required"> Details:</label>
+              <input type="text" class="form-control advt_d_link" formControlName="txtdetails"  placeholder="Enter Details"  >
+              <small class="text-danger"  *ngIf=" (details_edit.dirty || details_edit.touched) && details_edit.errors?.['required']">Details is Required</small>
+            </div>
+
+         
+
+            <div class="form-group  mb-1">
+              <label class="form-label required" >Link:</label>
+              <input   type="text" class="form-control advt_d_link" id="advtdetails" formControlName="txtlink" placeholder="Enter Link Details:"   >
+              <small class="text-danger"   *ngIf=" (link_edit.dirty || link_edit.touched) && link_edit.errors?.['required']"> Link is Required</small>
+            </div>
+
+           
+            <div class="form-group  mb-1">
+              <label class="form-label required" >Published:</label>
+              <input   type="text" class="form-control" id="published" formControlName="txtpublished2" >
+             
+            </div>
+
+          
+            <div>
+             </div>
+
+          <div class="modal-footer">
+                   
+              <button type="submit" class="btn btn-outline-primary"  [disabled]="!frm4.valid" >Submit</button> 
+        
+              <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close </button>
+
+          </div>
+        </form>
+        </div>
+
+        
+    </div>
+    
+  </div>
+ 
+</div>
+
+
